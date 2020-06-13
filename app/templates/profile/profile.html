@@ -1,0 +1,76 @@
+{% extends 'bootstrap/base.html' %} {% include 'navbar.html'%}
+
+<!--styles block-->
+{% block styles%} {{ super() }}
+<link href="https://fonts.googleapis.com/css2?family=Dosis&family=Marck+Script&family=Sacramento&display=swap" rel="stylesheet"> {% endblock %}
+
+<!--contecnt block-->
+{% block content %}
+<div class="container" style="font-family:Marck;font-size: 17px;">
+    <div class="row">
+        <!-- displaying  Username-->
+        <div class="col-md-4">
+            <h3> {{user.username| capitalize}} </h3>
+
+            <!--Displaying user bio-->
+            {% if user.bio %}
+            <p> {{user.bio}}</p>
+            {%else%}
+            <p> {{user.username| capitalize}} has no bio </p>
+            {% endif %}
+            <!---->
+            {% if user == current_user %}
+            <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a> {% endif %}
+
+        </div>
+
+        <!--Display profile photo-->
+        <div class="col-md-4">
+
+            {% if user.profile_pic_path %}
+            <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail"> {%else%}
+            <p>No profile picture</p>
+            {% endif %}
+            <!---->
+            {% if user == current_user %}
+            <form action="{{url_for('main.update_profile',uname=user.username)}}" method="post" enctype="multipart/form-data">
+
+                <input type="file" name="photo" class="form-control" required>
+                <input type="submit" style="align-items: center; color:deepskyblue;margin-bottom: 50px;">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="thumbnail text-center">
+        <h2>My blogs</h2>
+
+        {% for blog in description %}
+
+        <div class="col-md-6">
+            <div class="card text-center" style="width: 30rem;">
+
+                <div class="card-body">
+                    <h1 class="card-title" style="font-size: 30px;color: blue;margin-left: 100px;">{{blog.title}}</h1>
+
+                    <div class="card-text" style="font-size: 30px;">
+                        <h2>{{blog.description}}</h2>
+                    </div>
+                    <footer>
+                        <h5 style="font-size: 25px;color: blueviolet;">Posted by {{blog.user.username}}</h5>
+                    </footer>
+
+
+                    <a href="{{url_for('main.new_comment',blog_id = blog.id)}}" class="btn btn-primary" style="font-size: 20px;"> comment</a>
+                    <a href="{{url_for('main.UpdateBlog',blog_id = blog.id)}}" class="btn btn-success" style="margin:10px;font-size: 20px;">Edit</a>
+                    <a href="{{url_for('main.delete_blog',blog_id = blog.id)}}" class="btn btn-danger btn-sm" style="margin:10px;font-size: 20px;">Delete the blog</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
