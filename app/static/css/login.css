@@ -1,0 +1,16 @@
+.second {
+    background-image: url(../imgs/bg2.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card {
+    background-color: black;
+    opacity: 0.9;
+    margin-top: 5%;
+    padding: 8%;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 9%;
+}
