@@ -1,0 +1,36 @@
+{% extends 'base.html'%} {% import 'bootstrap/wtf.html' as wtf%}
+
+<!--styles block-->
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/reg.css')}}"> {% endblock %}
+
+<!---->
+{% block content %}
+<div class="third">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"> </div>
+            <div class="col-md-8">
+
+                <div class="card2">
+                    <h3 class="text-center"><i class="fas fa-user-plus"></i></i>&nbsp; <strong>Sign Up</strong></h3>
+                    {{wtf.quick_form(registration_form)}} <br>
+
+                    <p> Already have an account? <a href="{{url_for('auth.login')}}">Sign In</a></p>
+
+                    <p>Click to return to <a href="{{ url_for('main.index') }}">
+                        Home</a>
+                    </p>
+                    <div class="col-md-2"></div>
+
+                </div>
+
+                <div class="col-md-2"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock%}
