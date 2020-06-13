@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'bootstrap/base.html'%} {%block styles %} {{super()}}
+<!--Importing the simple mde css and js files  -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{{ simplemde.css}} {{ simplemde.js }} {% endblock %}
 
-<body>
 
-</body>
-
-</html>
+<!-- Navbar block  -->
+{% block navbar %} {% include 'navbar.html' %} {% endblock %}

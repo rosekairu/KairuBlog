@@ -6,7 +6,7 @@ from ..models import User
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email:',validators=[Required(),Email(),Length(1, 64) ], render_kw={"placeholder": "e.g janedoe@pizzatoday.com"})
+    email = StringField('Email:',validators=[Required(),Email(),Length(1, 64) ], render_kw={"placeholder": "e.g janedoe@Blogtoday.com"})
     password = PasswordField('Password:',validators =[Required()], render_kw={"placeholder": "Your password"})
     remember = BooleanField('Remember me')
     submit = SubmitField('LogIn')
@@ -14,8 +14,9 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     email = StringField('Email:',validators=[Required(), Email(),Length(1, 64)], render_kw={"placeholder": "Enter your email address"})
-    first_name = StringField('First name:', validators=[Required()], render_kw={"placeholder": "Enter your First Name"})
-    last_name = StringField('Last name:', validators=[Required()], render_kw={"placeholder": "Enter your Last Name"})
+    first_name = StringField('First name:', validators=[Required()], render_kw={"placeholder": "First Name"})
+    last_name = StringField('Last name:', validators=[Required()], render_kw={"placeholder": "Last Name"})
+    username = StringField('Enter your username',validators = [Required()], render_kw={"placeholder": "Prefered Username"})
     password = PasswordField('Password:',validators = [Required(), EqualTo('password_confirm',message = 'Passwords must match')], render_kw={"placeholder": "Prefered password"})
     password_confirm = PasswordField('Confirm Password:',validators = [Required()], render_kw={"placeholder": "Confirm password"})
     submit = SubmitField('Sign Up')

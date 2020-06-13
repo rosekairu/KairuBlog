@@ -1,0 +1,35 @@
+{% import 'bootstrap/wtf.html' as wtf %} {% extends 'bootstrap/base.html' %} {% block navbar %} {% include 'navbar.html'%} {% endblock %} {% block styles%} {{ super() }}
+<link href="https://fonts.googleapis.com/css2?family=Dosis&family=Marck+Script&family=Sacramento&family=Playball&display=swap" " rel="stylesheet "> {% endblock %}
+
+<!---->
+{% block content %}
+<div class="container " style="font-family:Playball;font-size: 30px; ">
+    <div class="row ">
+        <div class="jumbotron ">
+            {{wtf.quick_form(form)}}
+
+            <ul style="list-style: none; ">
+                {% for blog in blogs %}
+
+                <div class="list-group ">
+                    <div class="card text-center " style="width: 25rem; ">
+                        <div class="card-body ">
+                            <a href="# ">
+                                <div class="list-item ">
+                                    <p class="card-title " style="font-size: 30px; ">{{blog.id}}</p>
+                                </div>
+
+                                <h4 class="card-text " style="font-size: 30px; ">{{ blog.description }}</h4>
+                                <h6> Posted by {{user.username}}.</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

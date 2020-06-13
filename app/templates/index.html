@@ -1,0 +1,51 @@
+{% extends 'base.html'%} {% import 'bootstrap/wtf.html' as wtf %} {% import 'macros.html' as macro %}
+
+<!--styles block-->
+{% block styles%} {{ super() }}
+<link href="https://fonts.googleapis.com/css2?family=Dosis&family=Marck+Script&family=Sacramento&display=swap" rel="stylesheet"> {% endblock %}
+
+<!-- content block-->
+{% block content %}
+
+<div class="container-fluid welcome-page">
+    <div class="container" style="font-size: 30px;font-family:Marck;">
+
+        <div class="row">
+            <div class="col-md-12 welcome">
+                {% if current_user.is_authenticated%}
+                <h1 style="align-items: center; color:deepskyblue; font-size: 30px;">Welcome to Kai's Blog!</h1><br> {% endif %}
+            </div>
+        </div>
+
+        <div class="div">
+            <div class="card">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-text" style="color: rgb(10, 65, 65); font-size: larger;">
+                            {{quote.quote}}
+                        </h5>
+                        <p class="">
+                            <strong style="font-style: italic;">Author :</strong>
+                            <small><span style="text-decoration: underline; font-size: 18px;"
+                        >{{quote.author}}</span
+                      >
+                    </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <hr>
+
+        <h1 style="color:blue;text-align: center"><u>Blog list</u></h1>
+        <br>
+        <div class="thumbnail text-center" style="font-family:Dosis;font-size: 50px;">
+            {{ macro.displayBlog(blog) }}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
