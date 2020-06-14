@@ -1,8 +1,8 @@
 """Initial Migration
 
-Revision ID: d219f3f04301
+Revision ID: 54c3515b085e
 Revises: 
-Create Date: 2020-06-13 12:49:18.125500
+Create Date: 2020-06-13 20:13:01.536889
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd219f3f04301'
+revision = '54c3515b085e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,6 +32,8 @@ def upgrade():
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('first_name', sa.String(length=64), nullable=True),
+    sa.Column('last_name', sa.String(length=64), nullable=True),
     sa.Column('username', sa.String(length=255), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=True),
     sa.Column('role_id', sa.Integer(), nullable=True),
@@ -42,6 +44,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
+    op.create_index(op.f('ix_users_first_name'), 'users', ['first_name'], unique=False)
+    op.create_index(op.f('ix_users_last_name'), 'users', ['last_name'], unique=False)
     op.create_table('blogs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -77,6 +81,8 @@ def downgrade():
     op.drop_table('profile_photos')
     op.drop_index(op.f('ix_blogs_description'), table_name='blogs')
     op.drop_table('blogs')
+    op.drop_index(op.f('ix_users_last_name'), table_name='users')
+    op.drop_index(op.f('ix_users_first_name'), table_name='users')
     op.drop_index(op.f('ix_users_email'), table_name='users')
     op.drop_table('users')
     op.drop_table('subscribers')
