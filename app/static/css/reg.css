@@ -1,5 +1,5 @@
-.third {
-    background-image: url(../imgs/bg2.jpg);
+body {
+    background-image: url(../imgs/bg4.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;

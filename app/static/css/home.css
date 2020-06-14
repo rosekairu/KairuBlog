@@ -1,14 +1,13 @@
 body {
-    background-image: url(../imgs/bg4.jpg);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-image: url("../imgs/bg5.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.card {
+.qcard {
     background-color: black;
     opacity: 0.9;
-    margin-top: 7%;
+    margin-top: 2%;
     padding: 8%;
     border-radius: 8px;
     color: white;
