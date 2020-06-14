@@ -14,8 +14,6 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     email = StringField('Email:',validators=[Required(), Email(),Length(1, 64)], render_kw={"placeholder": "Enter your email address"})
-    first_name = StringField('First name:', validators=[Required()], render_kw={"placeholder": "First Name"})
-    last_name = StringField('Last name:', validators=[Required()], render_kw={"placeholder": "Last Name"})
     username = StringField('Enter your username',validators = [Required()], render_kw={"placeholder": "Prefered Username"})
     password = PasswordField('Password:',validators = [Required(), EqualTo('password_confirm',message = 'Passwords must match')], render_kw={"placeholder": "Prefered password"})
     password_confirm = PasswordField('Confirm Password:',validators = [Required()], render_kw={"placeholder": "Confirm password"})
@@ -70,9 +68,6 @@ class SubscribeForm(FlaskForm):
     useremail = StringField('Enter your Email Address', validators=[Required(), Email()])
     submit = SubmitField('Subscribe')
 
-    def validate_usename(self, data_field):
-        if User.query.filter_by(username=data_field.data).first():
-            raise ValidationError('That username is taken')
 
     def validate_useremail(self, data_field):
         if User.query.filter_by(email=data_field.data).first():

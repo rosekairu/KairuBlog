@@ -6,6 +6,7 @@ from ..models import User, Subscribe
 from .forms import LoginForm,RegistrationForm,SubscribeForm,RequestResetPasswordForm, PasswordResetForm, ChangeEmailForm, ChangePasswordForm
 from ..email import mail_message
 
+
 @auth.route('/login',methods=['GET','POST'])
 def login():
     login_form = LoginForm()
@@ -26,12 +27,14 @@ def login():
     title = "Kai's Blog website login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
+
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('You have been successfully logged out')
     return redirect(url_for("main.index"))
+
 
 @auth.route('/register',methods = ["GET","POST"])
 def register():
@@ -51,18 +54,19 @@ def register():
 
 @auth.route('/subscribe', methods=["GET", "POST"])
 def subscribe():
+    
     subscribingform = SubscribeForm()
+    
     if subscribingform.validate_on_submit():
         subscribers = Subscribe(name=subscribingform.usename.data, email=subscribingform.useremail.data)
 
         db.session.add(subscribers)
         db.session.commit()
 
-        mail_message("Welcome to Kai's Blog...",
-                     "email/welcome_user", subscribers.email, subscribers=subscribers)
-
+        mail_message("Welcome to Kai's Blog...", "email/subscribing", subscribers.email, subscribers=subscribers)
         return redirect(url_for('main.index'))
-    title = "Subscribe to get new update on our website"
+        
+    title = "Subscribe to get new updates on our website"
     return render_template('auth/subscribe.html', title =title, subscribe_form=subscribingform)
 
 
