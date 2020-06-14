@@ -30,7 +30,7 @@ class Config:
         pass
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_TEST")
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rose:kairu@localhost/kairublog_test'
 
 
 class DevConfig(Config):
