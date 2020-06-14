@@ -30,12 +30,11 @@ class Config:
         pass
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rose:kairu@localhost/kairublog_test'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_TEST")
 
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rose:kairu@localhost/kairublog'
-
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_DEV")
     DEBUG = True
 
 
