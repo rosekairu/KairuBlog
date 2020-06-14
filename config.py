@@ -2,20 +2,12 @@ import os
 
 class Config:
 
-    IMAGE_UPLOADS = "/home/rose/Documents/Moringa-school-projects/KairuBlog/app/static/uploads"
-    APP_NAME = os.environ.get('APP_NAME')
-    ALLOWED_IMAGE_EXTENSIONS = {'jpeg', 'jpg', 'png', 'gif'}
-    UPLOAD_FOLDER = 'static/uploads'
-    MAX_IMAGE_FILESIZE = 0.5 * 1024 * 1024
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
     API_BASE_URL='http://quotes.stormconsultancy.co.uk/random.json'
     
     UPLOADED_PHOTOS_DEST ='app/static/photos'
-    
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rose:kairu@localhost/kairublog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
 
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -38,16 +30,16 @@ class Config:
         pass
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rose:kairu@localhost/kairublog_test'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_TEST")
+
+
+class DevConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_DEV")
+    DEBUG = True
 
 
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-
-
-class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rose:kairu@localhost/kairublog'
-    DEBUG = True
 
   
 config_options = {
