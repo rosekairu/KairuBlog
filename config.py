@@ -2,6 +2,12 @@ import os
 
 class Config:
 
+    IMAGE_UPLOADS = "/home/rose/Documents/Moringa-school-projects/KairuBlog/app/static/uploads"
+    APP_NAME = os.environ.get('APP_NAME')
+    ALLOWED_IMAGE_EXTENSIONS = {'jpeg', 'jpg', 'png', 'gif'}
+    UPLOAD_FOLDER = 'static/uploads'
+    MAX_IMAGE_FILESIZE = 0.5 * 1024 * 1024
+
     SECRET_KEY = os.environ.get('SECRET_KEY')
     API_BASE_URL='http://quotes.stormconsultancy.co.uk/random.json'
     
