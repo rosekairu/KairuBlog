@@ -66,7 +66,7 @@ def subscribe():
     return render_template('auth/subscribe.html', title =title, subscribe_form=subscribingform)
 
 
-@main.route('/reset', methods=['GET', 'POST'])
+@auth.route('/reset', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
@@ -84,7 +84,7 @@ def reset_password_request():
     return render_template('auth/reset_password.html', form=form, title='Password Reset')
 
 
-@main.route('/reset/<token>', methods=['GET', 'POST'])
+@auth.route('/reset/<token>', methods=['GET', 'POST'])
 def password_reset(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
@@ -102,7 +102,7 @@ def password_reset(token):
     return render_template('auth/email/reset_password.html', form=form)
 
 
-@main.route('/change-email/<token>')
+@auth.route('/change-email/<token>')
 @login_required
 def change_email(token):
     if current_user.change_email(token):
@@ -113,7 +113,7 @@ def change_email(token):
     return redirect(url_for('auth.login'))
 
 
-@main.route('/confirm/<token>')
+@auth.route('/confirm/<token>')
 @login_required
 def confirm(token):
     if current_user.confirmed:
@@ -125,7 +125,7 @@ def confirm(token):
     return redirect(url_for('main.index'))
 
 
-@main.route('/user/change-password', methods=['GET', 'POST'])
+@auth.route('/user/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
     form = ChangePasswordForm()
@@ -141,7 +141,7 @@ def change_password():
     return render_template('auth/change_password.html', form=form)
 
 
-@main.route('/user/change-email', methods=['GET', 'POST'])
+@auth.route('/user/change-email', methods=['GET', 'POST'])
 @login_required
 def change_email_request():
     form = ChangeEmailForm()
