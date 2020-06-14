@@ -3,10 +3,9 @@ from app.models import Blog, User, Comment
 from app import db
 
 class TestBlog(unittest.TestCase):
-
     def setUp(self):
-        self.user_James = User(username = 'Rose',password = 'cairo', email = 'rose@ms.com')
-        self.new_blog = Blog(description = "pineapples", title='fruits')
+        self.user_Rose = User(username = 'Rose', email = 'rose@ms.com', password = 'cairo')
+        self.new_blog = Blog(title='Title for the blog',description = "pineapples")
     
     def tearDown(self):
         Blog.session.delete(self)
@@ -17,11 +16,11 @@ class TestBlog(unittest.TestCase):
 
     def test_check_instance_variables(self):
         self.assertEquals(self.new_blog.description,"pineapples")
-        self.assertEquals(self.new_blog.title,'fruits')
+        self.assertEquals(self.new_blog.title,'Title for the blog')
 
-    def test_save_comment(self):
-        self.new_comment.save_comment()
-        self.assertTrue(len(Comment.query.all())>0)
+    def test_save_blog(self):
+        self.new_comment.save_blog()
+        self.assertTrue(len(Blog.query.all())>0)
 
     def test_get_blogs_by_id(self):
         self.new_blog.save_comment()

@@ -9,8 +9,9 @@ class TestBlog(unittest.TestCase):
         self.new_comment = Comment(description = "pineapples", blog=self.new_blog)
     
     def tearDown(self):
-        db.session.delete(self)
-        User.query.delete()       
+        User.query.delete()
+        Blog.query.delete()
+        Comment.query.delete()      
 
     def test_instance(self):
         self.assertTrue(isinstance(self.new_comment,Comment))
