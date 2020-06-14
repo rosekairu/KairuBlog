@@ -10,63 +10,6 @@ from ..requests import get_quote
 
 
 
-def allowed_image(filename):
-
-    # only want files with a . in the filename
-    if not "." in filename:
-        return False
-
-    # Split the extension from the filename
-    ext = filename.rsplit(".", 1)[1]
-
-    # Check if the extension is in ALLOWED_IMAGE_EXTENSIONS
-    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
-        return True
-    else:
-        return False
-
-def allowed_image_filesize(filesize):
-
-    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
-        return True
-    else:
-        return False
-
-
-@main.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
-    if request.method == "POST":
-
-        if request.files:
-
-            if "filesize" in request.cookies:
-
-                if not allowed_image_filesize(request.cookies["filesize"]):
-                    print("Filesize exceeded maximum limit")
-                    return redirect(request.url)
-
-                image = request.files["image"]
-
-                if image.filename == "":
-                    print("No filename")
-                    return redirect(request.url)
-
-                if allowed_image(image.filename):
-                    filename = secure_filename(image.filename)
-
-                    image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-
-                    print("Image saved")
-
-                    return redirect(request.url)
-
-                else:
-                    print("That file extension is not allowed")
-                    return redirect(request.url)
-
-        return render_template("public/upload_image.html")
-
-
 # Views
 @main.route('/', methods = ['GET','POST'])
 def index():
@@ -77,7 +20,7 @@ def index():
 
     blog= Blog.query.all()
     quote = get_quote()
-    title = 'Home - Welcome to our KairuBlog-app Website Online'
+    title = 'Home - Welcome to KairuBlog-app Online Web Blog'
 
     return render_template('index.html', title = title, blog = blog, quote=quote )
 
@@ -160,6 +103,7 @@ def update_profile(uname):
 
     if form.validate_on_submit():
         user.bio = form.bio.data
+        current_user.email = form.email.data
         
         db.session.add(user)
         db.session.commit()

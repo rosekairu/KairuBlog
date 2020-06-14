@@ -3,7 +3,7 @@
     <!-- {% if blogs %} -->
     {% for blog in blogs %}
 
-    <div class="col-md-6">
+    <div class="col-sm-3">
         <div class="thumbnail text-center">
 
             <div class="card">
@@ -17,9 +17,10 @@
                         <h2>{{blog.description}}</h2>
                     </div>
                     <hr>
-                    <cite style="margin-left:80px; font-size: 25px;">Posted by: &nbsp; {{blog.user.username}}</cite>
+
+                    <cite style="margin-left:40px; font-size: 25px;">Posted by: &nbsp; {{blog.user.username}}</cite>
                 </p>
-                <h6 style="font-size: 25px;color: blueviolet; ">Posted On: {{blog.time.strftime("%d %b %Y %I:%M %p")}}</h6>
+                <small class="text-muted" style="font-size: 25px;color: blueviolet;">{{ blog.time.strftime('%Y-%m-%d') }}</small> <br>
                 <a href="{{url_for('main.new_comment',blog_id = blog.id)}}" class="btn btn-primary" style="font-size: 20px;"> comment</a>
 
             </div>
@@ -29,14 +30,17 @@
     {% endfor %} {% else %}
     <!-- {% endif %} -->
 </div>
-{% endmacro %} {% macro displayComment(comments) %}
+{% endmacro %}
+<!---->
+
+{% macro displayComment(comments) %}
 <ul>
 
     {% if comments %} {% for comment in comments %}
-    <div class="thumbnail text-center" style="font-family: Great Vibes;font-size: 30px;">
+    <div class="thumbnail text-center" style="font-family: Playball;font-size: 30px;">
         <div class="card">
             <a>
-                <p style="color:black;font-family: Great Vibes;font-size: 30px">{{ comment.description }}</p>
+                <p style="color:black;font-family: Playball;font-size: 30px">{{ comment.description }}</p>
             </a>
             <small> posted by {{comment.user.username}}</small>
         </div>
@@ -47,6 +51,5 @@
     {%endif%}
 
 </ul>
-
 
 {% endmacro %}
