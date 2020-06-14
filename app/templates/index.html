@@ -2,7 +2,8 @@
 
 <!--styles block-->
 {% block styles%} {{ super() }}
-<link href="https://fonts.googleapis.com/css2?family=Dosis&family=Marck+Script&family=Sacramento&display=swap" rel="stylesheet"> {% endblock %}
+<link href="https://fonts.googleapis.com/css2?family=Dosis&family=Marck+Script&family=Sacramento&family=Playball&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">{% endblock %}
 
 <!-- content block-->
 {% block content %}
@@ -13,12 +14,12 @@
         <div class="row">
             <div class="col-md-12 welcome">
                 {% if current_user.is_authenticated%}
-                <h1 style="align-items: center; color:deepskyblue; font-size: 30px;">Welcome to Kai's Blog!</h1><br> {% endif %}
+                <h1 style="align-items: center; color:teal; font-size: 40px; font-family: Dosis; font-weight: 900;">Welcome to Kai's Blog!</h1><br> {% endif %}
             </div>
         </div>
 
-        <div class="div">
-            <div class="card">
+        <div class="first">
+            <div class="qcard">
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-text" style="color: rgb(10, 65, 65); font-size: larger;">
@@ -35,17 +36,103 @@
                 </div>
             </div>
         </div>
-
-        <hr>
-        <hr>
-
-        <h1 style="color:blue;text-align: center"><u>Blog list</u></h1>
-        <br>
-        <div class="thumbnail text-center" style="font-family:Dosis;font-size: 50px;">
-            {{ macro.displayBlog(blog) }}
-        </div>
-
     </div>
+    <hr style="border-bottom: orange 10px solid;">
+
+    <h1 style="color:blue;text-align: center"><u>Blog list</u></h1>
+    <br>
+    <div class="thumbnail text-center" style="font-family:Dosis;font-size: 50px;">
+        {{ macro.displayBlog(blog) }}
+    </div>
+
+</div>
+<div class="jumbotron" style="background-color: black;">
+    <!-- Footer -->
+    <footer class="page-footer font-small teal pt-4">
+
+        <!-- Footer Text -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase font-weight-bold" style="color: aqua;">About us</h5>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil repudiandae.</p>
+
+                </div>
+                <!-- Grid column -->|
+
+                <!--hr class="clearfix w-100 d-md-none pb-3" -->
+
+                <!-- Grid column -->
+                <div class="col-md-6 mb-md-0 mb-3">
+
+                    <!-- Content -->
+                    <div class="bottom" style="color: teal;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-10 mx-auto">
+                                    <p class="copyright text-white text-center">
+                                        © 2020 Copyright:
+                                        <a href="https://github.com/rosekairu/"> &nbsp; Rose Kairu</a> <br>
+                                        <a href="{{url_for('auth.subscribe')}}">Subscribe to get Updates</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Copyright -->
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Text -->
+
+        <!-- Copyright -->
+        <div class="bottom" style="color: teal;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="https://twitter.com/login" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://ke.linkedin.com/">
+                                    <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                          </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/rosekairu/">
+                                    <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>                        
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                          </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
 </div>
 
 {% endblock %}
