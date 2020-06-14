@@ -1,11 +1,70 @@
-import markdown2
+import markdown2, os
 from flask import render_template,request,redirect,url_for,abort, flash
 from . import main
+from werkzeug.utils import secure_filename
 from .forms import BlogForm, CommentForm, UpdateProfile, UpdateBlogForm
 from .. import db, photos
 from ..models import PhotoProfile, Blog, User, Comment
 from flask_login import login_required, current_user
 from ..requests import get_quote
+
+
+
+def allowed_image(filename):
+
+    # only want files with a . in the filename
+    if not "." in filename:
+        return False
+
+    # Split the extension from the filename
+    ext = filename.rsplit(".", 1)[1]
+
+    # Check if the extension is in ALLOWED_IMAGE_EXTENSIONS
+    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+def allowed_image_filesize(filesize):
+
+    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
+
+
+@main.route("/upload-image", methods=["GET", "POST"])
+def upload_image():
+    if request.method == "POST":
+
+        if request.files:
+
+            if "filesize" in request.cookies:
+
+                if not allowed_image_filesize(request.cookies["filesize"]):
+                    print("Filesize exceeded maximum limit")
+                    return redirect(request.url)
+
+                image = request.files["image"]
+
+                if image.filename == "":
+                    print("No filename")
+                    return redirect(request.url)
+
+                if allowed_image(image.filename):
+                    filename = secure_filename(image.filename)
+
+                    image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+
+                    print("Image saved")
+
+                    return redirect(request.url)
+
+                else:
+                    print("That file extension is not allowed")
+                    return redirect(request.url)
+
+        return render_template("public/upload_image.html")
 
 
 # Views
@@ -41,6 +100,7 @@ def new_blog():
     
     return render_template('blog.html',form=form)
 
+
 @main.route('/comment/new/<int:blog_id>', methods = ['GET','POST'])
 @login_required
 def new_comment(blog_id):
@@ -53,11 +113,11 @@ def new_comment(blog_id):
         db.session.add(new_comment)
         db.session.commit()
 
-
         return redirect(url_for('.new_comment', blog_id= blog_id))
 
     all_comments = Comment.query.filter_by(blog_id = blog_id).all()
     return render_template('comment.html', form = form, comment = all_comments, blog = blog )
+
 
 @main.route('/profile/dltcmts/<int:blog_id>',methods = ['GET','POST'])
 @login_required
@@ -138,6 +198,7 @@ def delete_blog(blog_id):
     db.session.commit()
     return redirect(url_for('.profile', uname=user.username))
     return render_template('profile/profile.html', user=user) 
+
 
 @main.route('/profile/update/<int:blog_id>',methods = ['GET','POST'])
 @login_required

@@ -6,6 +6,7 @@ from wtforms import ValidationError
 
 
 class BlogForm(FlaskForm):
+    
     title = StringField('Title',validators=[Required()])
     description = TextAreaField("What do you have for us today?",validators=[Required()])
     submit = SubmitField('Post your blog')
