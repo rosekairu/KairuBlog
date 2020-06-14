@@ -41,7 +41,7 @@
 
     <h1 style="color:blue;text-align: center"><u>Blog list</u></h1>
     <br>
-    <div class="thumbnail text-center" style="font-family:Dosis;font-size: 50px;">
+    <div class="thumbnail text-center" style="font-family:Dosis;font-size: 30px;">
         {{ macro.displayBlog(blog) }}
     </div>
 
@@ -52,11 +52,7 @@
 
         <!-- Footer Text -->
         <div class="container-fluid text-center text-md-left">
-
-            <!-- Grid row -->
             <div class="row">
-
-                <!-- Grid column -->
                 <div class="col-md-6 mt-md-0 mt-3">
 
                     <!-- Content -->
@@ -64,11 +60,6 @@
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil repudiandae.</p>
 
                 </div>
-                <!-- Grid column -->|
-
-                <!--hr class="clearfix w-100 d-md-none pb-3" -->
-
-                <!-- Grid column -->
                 <div class="col-md-6 mb-md-0 mb-3">
 
                     <!-- Content -->
@@ -85,54 +76,31 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Copyright -->
-                </div>
-                <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-
-        </div>
-        <!-- Footer Text -->
-
-        <!-- Copyright -->
-        <div class="bottom" style="color: teal;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a href="https://twitter.com/login" target="_blank">
-                                    <span class="fa-stack fa-lg">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                          </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://ke.linkedin.com/">
-                                    <span class="fa-stack fa-lg">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-                          </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://github.com/rosekairu/">
-                                    <span class="fa-stack fa-lg">
-                            <i class="fas fa-circle fa-stack-2x"></i>                        
-                            <i class="fa fa-github" aria-hidden="true"></i>
-                          </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Copyright -->
 
-    </footer>
-    <!-- Footer -->
+        </div>
+
+        <!-- Social -->
+        <div class="row" style="margin-left: 500px;">
+            <div class=" col-md-1 ">
+                <img src="../static/imgs/linkedin.png " alt="LinkedIn " /> &nbsp;
+            </div>
+            <div class="col-md-1 ">
+                <img src="../static/imgs/twitter.png " alt="Twitter " /> &nbsp;
+            </div>
+            <div class="col-md-1 ">
+                <img src="../static/imgs/github.png " alt="GitHub " />
+            </div>
+
+        </div>
+</div>
+</div>
+</div>
+<!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </div>
 
 {% endblock %}
