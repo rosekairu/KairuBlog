@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField,SubmitField,ValidationError,SelectField
 from wtforms.validators import Required,Email,EqualTo,Length
-from ..models import User, Subscribe
+from ..models import User
 
 
 
@@ -63,12 +63,3 @@ class ChangeEmailForm(FlaskForm):
             raise ValidationError("Email already in use!")  
 
 
-class SubscribeForm(FlaskForm):
-    usename = StringField('Enter your username', validators=[Required()])
-    useremail = StringField('Enter your Email Address', validators=[Required(), Email()])
-    submit = SubmitField('Subscribe')
-
-
-    def validate_useremail(self, data_field):
-        if Subscribe.query.filter_by(email=data_field.data).first():
-            raise ValidationError('There is an account with that email') 

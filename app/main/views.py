@@ -2,10 +2,11 @@ import markdown2, os
 from flask import render_template,request,redirect,url_for,abort, flash
 from . import main
 from werkzeug.utils import secure_filename
-from .forms import BlogForm, CommentForm, UpdateProfile, UpdateBlogForm
+from .forms import BlogForm, CommentForm, UpdateProfile, UpdateBlogForm, SubscribeForm
 from .. import db, photos
-from ..models import PhotoProfile, Blog, User, Comment
+from ..models import PhotoProfile, Blog, User, Comment, Subscribe
 from flask_login import login_required, current_user
+from ..email import mail_message
 from ..requests import get_quote
 
 
@@ -161,3 +162,22 @@ def UpdateBlog(blog_id):
 
         return redirect(url_for('.profile',uname=user.username))
     return render_template('profile/update.html',form = form, user = user )
+
+
+@main.route('/subscribe', methods=["GET", "POST"])
+def subscribe():
+    
+    subscribingform = SubscribeForm()
+    
+    if subscribingform.validate_on_submit():
+        subscribers = Subscribe(name=subscribingform.usename.data, email=subscribingform.useremail.data)
+
+        db.session.add(subscribers)
+        db.session.commit()
+
+        mail_message("Welcome to Kai's Blog...", "email/subscribing", subscribers.email, subscribers=subscribers)
+        
+        return redirect(url_for('main.index'))
+        
+    title = "Subscribe to get new updates"
+    return render_template('auth/subscribe.html', title =title, subscribe_form=subscribingform)
