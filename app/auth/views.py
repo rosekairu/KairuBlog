@@ -65,7 +65,6 @@ def subscribe():
 
         mail_message("Welcome to Kai's Blog...", "email/subscribing", subscribers.email, subscribers=subscribers)
         
-        flash('You have been successfully Subscribed')
         return redirect(url_for('main.index'))
         
     title = "Subscribe to get new updates"
