@@ -8,7 +8,7 @@ A python-flask based blogging web-app where users can create and share their opi
 
 ## Live Link
 
-[View Site](https://kairublog.herokuapp.com/)
+[View Site](https://kairublogs.herokuapp.com/)
 
 ### Setup/Installation Requirements
 
