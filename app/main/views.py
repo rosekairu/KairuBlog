@@ -160,4 +160,4 @@ def UpdateBlog(blog_id):
         db.session.commit()
 
         return redirect(url_for('.profile',uname=user.username))
-    return render_template('profile/edit.html',form = form, user = user )
+    return render_template('profile/update.html',form = form, user = user )

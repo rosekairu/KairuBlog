@@ -1,3 +1,3 @@
-Hello {{subscribers.username}}
+Dear {{subscribers.username}}
 Welcome to Kai's Blog
 Thank you for subsribing, we hope you will enjoy our update!

@@ -64,9 +64,11 @@ def subscribe():
         db.session.commit()
 
         mail_message("Welcome to Kai's Blog...", "email/subscribing", subscribers.email, subscribers=subscribers)
+        
+        flash('You have been successfully Subscribed')
         return redirect(url_for('main.index'))
         
-    title = "Subscribe to get new updates on our website"
+    title = "Subscribe to get new updates"
     return render_template('auth/subscribe.html', title =title, subscribe_form=subscribingform)
 
 
@@ -121,7 +123,7 @@ def change_email(token):
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('main.products'))
+        return redirect(url_for('main.new_blog'))
     if current_user.confirm(token):
         flash('You have confirmed your account', 'form-success')
     else:

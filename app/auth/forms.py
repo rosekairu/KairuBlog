@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField,SubmitField,ValidationError,SelectField
 from wtforms.validators import Required,Email,EqualTo,Length
-from ..models import User
+from ..models import User, Subscribe
 
 
 
@@ -70,5 +70,5 @@ class SubscribeForm(FlaskForm):
 
 
     def validate_useremail(self, data_field):
-        if User.query.filter_by(email=data_field.data).first():
+        if Subscribe.query.filter_by(email=data_field.data).first():
             raise ValidationError('There is an account with that email') 
